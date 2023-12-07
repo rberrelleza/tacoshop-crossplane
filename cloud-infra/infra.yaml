@@ -1,0 +1,7 @@
+apiVersion: oktaco.shop/v1alpha1
+kind: Infra
+metadata:
+  name: "oktaco-infra-$RESOURCE_SUFFIX"
+spec: 
+  location: "US"
+  name: "oktaco-infra-$RESOURCE_SUFFIX"

@@ -1,0 +1,46 @@
+replicaCount: 1
+
+image: ramiro/tacoshop-kitchen:latest
+queue: tacoshop
+check: http://check:8000/checks
+credentials:
+  secret:
+    name: secret-credentials
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: ""
+  hosts:
+    - host: kitchen.oktaco.shop
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

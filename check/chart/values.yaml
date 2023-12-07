@@ -1,0 +1,45 @@
+replicaCount: 1
+
+image: ramiro/tacoshop-check:latest
+bucket: tacoshop
+credentials:
+  secret:
+    name: secret-credentials
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: ""
+  hosts:
+    - host: check.oktaco.shop
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

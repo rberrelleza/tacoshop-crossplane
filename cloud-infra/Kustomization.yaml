@@ -1,0 +1,11 @@
+resources:
+  - infra.yaml
+
+vars:
+- name: CI_COMMIT_SHORT_SHA
+  objref:
+    kind: ConfigMap
+    name: environment-variables
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.CI_COMMIT_SHORT_SHA

@@ -1,0 +1,47 @@
+replicaCount: 1
+
+image: ramiro/tacoshop-menu:latest
+queue: tacoshop
+author: 
+credentials:
+  secret:
+    name: secret-credentials
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+  hosts:
+    - host: menu.oktaco.shop
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

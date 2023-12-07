@@ -1,0 +1,54 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: sqs-with-bucket
+spec:
+  resources:
+    - name: s3Bucket
+      base:
+        apiVersion: s3.aws.upbound.io/v1beta1
+        kind: Bucket
+        metadata:
+          name: oktaco-bucket
+        spec:
+          forProvider:
+            region: us-east-2
+          providerConfigRef:
+            name: default
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: "spec.location"
+          toFieldPath: "spec.forProvider.region"
+          transforms:
+            - type: map
+              map: 
+                EU: "eu-north-1"
+                US: "us-east-2"
+        - type: FromCompositeFieldPath
+          fromFieldPath: "spec.name"
+          toFieldPath: "metadata.name"
+    - name: sqs
+      base:
+        apiVersion: sqs.aws.upbound.io/v1beta1
+        kind: Queue
+        metadata:
+          name: oktaco-sqs
+        spec:
+          forProvider:
+            region: "us-east-2"
+            name: "oktaco-queue"
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: "spec.location"
+          toFieldPath: "spec.forProvider.region"
+          transforms:
+            - type: map
+              map: 
+                EU: "eu-north-1"
+                US: "us-east-2"
+        - type: FromCompositeFieldPath
+          fromFieldPath: "spec.name"
+          toFieldPath: "spec.forProvider.name"
+  compositeTypeRef:
+    apiVersion: oktaco.shop/v1alpha1
+    kind: Infra
