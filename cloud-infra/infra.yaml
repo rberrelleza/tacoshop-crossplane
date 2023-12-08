@@ -1,5 +1,5 @@
 apiVersion: oktaco.shop/v1alpha1
-kind: Infra
+kind: InfraClaim
 metadata:
   name: "oktaco-infra-$RESOURCE_SUFFIX"
 spec: 

@@ -13,6 +13,7 @@ spec:
         spec:
           forProvider:
             region: us-east-2
+            forceDestroy: true
           providerConfigRef:
             name: default
       patches:
@@ -37,6 +38,8 @@ spec:
           forProvider:
             region: "us-east-2"
             name: "oktaco-queue"
+          providerConfigRef:
+            name: default
       patches:
         - type: FromCompositeFieldPath
           fromFieldPath: "spec.location"
